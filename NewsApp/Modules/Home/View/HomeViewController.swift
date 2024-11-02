@@ -131,7 +131,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedArticle = newsResult[indexPath.row]
         let detailVC = NewsDetailedScreenViewController()
-        detailVC.article = selectedArticle // Pass the article
+        detailVC.article = selectedArticle 
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     

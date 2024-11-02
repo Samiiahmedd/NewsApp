@@ -6,30 +6,25 @@
 //
 
 import Foundation
+
 class DetailedScreenViewModel {
     
-    func fetchArticleDetails(url: String, completion: @escaping (Result<Article, Error>) -> Void) {
-          guard let articleUrl = URL(string: url) else {
-              completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-              return
-          }
+    func fetchArticleDetails(url: String) async throws -> Article {
+        guard let articleUrl = URL(string: url) else {
+            throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: articleUrl)
 
-          let task = URLSession.shared.dataTask(with: articleUrl) { data, response, error in
-              if let error = error {
-                  completion(.failure(error))
-                  return
-              }
-              guard let data = data else {
-                  completion(.failure(NSError(domain: "No data", code: 0, userInfo: nil)))
-                  return
-              }
-              do {
-                  let articleDetail = try JSONDecoder().decode(Article.self, from: data)
-                  completion(.success(articleDetail))
-              } catch {
-                  completion(.failure(error))
-              }
-          }
-          task.resume()
-      }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            throw NSError(domain: "Server error", code: 0, userInfo: nil)
+        }
+        
+        do {
+            let articleDetail = try JSONDecoder().decode(Article.self, from: data)
+            return articleDetail
+        } catch {
+            throw error
+        }
+    }
 }

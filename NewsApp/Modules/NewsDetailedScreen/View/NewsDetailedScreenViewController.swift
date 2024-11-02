@@ -1,5 +1,5 @@
 //
-//  DetailedScreenViewController.swift
+//  NewsDetailedScreenViewController.swift
 //  NewsApp
 //
 //  Created by Sami Ahmed on 01/11/2024.
@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class DetailedScreenViewController: UIViewController {
+class NewsDetailedScreenViewController: UIViewController {
     var article: Article?
 
     @IBOutlet weak var newsImage: UIImageView!

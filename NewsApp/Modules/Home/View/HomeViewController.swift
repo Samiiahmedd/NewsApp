@@ -52,7 +52,6 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.newsResult = self?.viewModel.newsResult ?? []
                 self?.newsCollectionView.reloadData()
-                print("Updated newsResult count: \(self?.newsResult.count ?? 0)")
             }
         }
         fetchNewsData()
@@ -109,7 +108,6 @@ extension HomeViewController: UISearchResultsUpdating {
         guard let query = searchController.searchBar.text, !query.isEmpty else {
             viewModel.clearNewsResults() // Clear results if search bar is empty
             newsCollectionView.reloadData()
-            print("Cleared search results")
             return
         }
 

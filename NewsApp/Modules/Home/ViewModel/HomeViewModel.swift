@@ -17,7 +17,6 @@ class HomeViewModel {
             }
         }
     
-    
     // FUNCTION TO DELETE SEARCH RESULT
     func clearNewsResults() {
         newsResult = []
@@ -46,8 +45,7 @@ class HomeViewModel {
     
     //NETWORK CALL
     private func fetchNewsData(query: String, fromDate: String, toDate: String) async throws -> [Article] {
-            let apiKey = "d9423074473c4fc7b774a143e8749b24"
-            let urlString = "https://newsapi.org/v2/everything?q=\(query)&from=\(fromDate)&to=\(toDate)&sortBy=popularity&apiKey=\(apiKey)"
+        let urlString = "\(Constants.baseURL)?q=\(query)&from=\(fromDate)&to=\(toDate)&sortBy=popularity&apiKey=\(Constants.apiKey)"
             
             guard let url = URL(string: urlString) else {
                 throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)

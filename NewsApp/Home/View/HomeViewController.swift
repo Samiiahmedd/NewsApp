@@ -121,10 +121,7 @@ extension HomeViewController: UISearchResultsUpdating {
             print("Cleared search results")
             return
         }
-        
-        // Log the query to confirm it's being used
-        print("Updating search with query: \(query)")
-        fetchNews(for: datePicker.date, query: query) // Perform fetch based on search input
+        fetchNews(for: datePicker.date, query: query)
     }
 }
 
@@ -143,12 +140,8 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     }
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let selectedArticle = NewsResult[indexPath.row]
-            
-            // Initialize the DetailedScreenViewController and pass the selected article
             let detailVC = DetailedScreenViewController()
             detailVC.article = selectedArticle // Pass the article
-            
-            // Present the detailed screen
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     
@@ -159,7 +152,6 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
            let totalHorizontalPadding = padding * 3
            let availableWidth = collectionView.frame.width - totalHorizontalPadding
            let cellWidth = availableWidth / 2
-           
            return CGSize(width: cellWidth, height: 240)
        }
        

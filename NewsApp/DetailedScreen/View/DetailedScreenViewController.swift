@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailedScreenViewController: UIViewController {
     var article: Article?
@@ -21,19 +22,15 @@ class DetailedScreenViewController: UIViewController {
         self.title = "Details"
         navigationController?.navigationBar.prefersLargeTitles = true
         if let article = article {
-                // Set the title of the navigation bar
-                self.title = article.title
-                
-                // Configure UI elements with the article data
-                newsTitle.text = article.title
-                newsWriter.text = article.author ?? "Unknown Author" // Assuming there's an author property
-                newDescription.text = article.description
-                
-            if let imageUrlString = article.urlToImage, let imageUrl = URL(string: imageUrlString) {
-                // Fetch and display the image
-                fetchImage(from: imageUrl)
-            }
-            }
+            self.title = "Details"
+            newsTitle.text = article.title
+            newsWriter.text = article.author ?? "Unknown Author"
+            newDescription.text = article.description
+            let imageUrl = article.urlToImage?.asUrl
+            newsImage.kf.setImage(with: imageUrl, placeholder:UIImage(systemName: "photo.artframe"))
+
+
+        }
     }
 
 

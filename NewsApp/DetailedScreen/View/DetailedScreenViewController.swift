@@ -29,10 +29,10 @@ class DetailedScreenViewController: UIViewController {
                 newsWriter.text = article.author ?? "Unknown Author" // Assuming there's an author property
                 newDescription.text = article.description
                 
-                if let imageUrlString = article.urlToImage, let imageUrl = URL(string: imageUrlString) {
-                    // Fetch and display the image
-                    fetchImage(from: imageUrl)
-                }
+            if let imageUrlString = article.urlToImage, let imageUrl = URL(string: imageUrlString) {
+                // Fetch and display the image
+                fetchImage(from: imageUrl)
+            }
             }
     }
 

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailedScreenViewController" customModule="NewsApp" customModuleProvider="target">
+            <connections>
+                <outlet property="newDescription" destination="nLj-ub-3EY" id="giF-Eg-GmK"/>
+                <outlet property="newsImage" destination="p6R-SU-sSq" id="F1Z-AC-8gM"/>
+                <outlet property="newsTitle" destination="dJX-T9-Gy2" id="CVM-FE-olc"/>
+                <outlet property="newsWriter" destination="KsI-bl-Dkj" id="Yma-fj-mHi"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XD7-dv-CSs">
+                    <rect key="frame" x="20" y="99" width="353" height="679"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qvs-lJ-DdK">
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="696.66666666666663"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="6rl-ip-0Si">
+                                    <rect key="frame" x="20" y="20" width="313" height="626.66666666666663"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="CtB-zb-FwI">
+                                            <rect key="frame" x="0.0" y="0.0" width="313" height="562.66666666666663"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p6R-SU-sSq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="Z1U-iv-EhG"/>
+                                                        <constraint firstAttribute="height" constant="320" id="gzq-ki-DnB"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJX-T9-Gy2">
+                                                    <rect key="frame" x="0.0" y="334" width="56.666666666666664" height="28.666666666666686"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hn-rU-NeO">
+                                                    <rect key="frame" x="0.0" y="376.66666666666669" width="220" height="50"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsI-bl-Dkj">
+                                                            <rect key="frame" x="84" y="11.999999999999998" width="52" height="26.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                            <color key="textColor" name="WriterNameColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="WriterNameBG"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="220" id="6o0-I2-2Z3"/>
+                                                        <constraint firstAttribute="height" constant="50" id="sL9-Zk-ewK"/>
+                                                        <constraint firstItem="KsI-bl-Dkj" firstAttribute="centerX" secondItem="5hn-rU-NeO" secondAttribute="centerX" id="st0-x1-5gr"/>
+                                                        <constraint firstItem="KsI-bl-Dkj" firstAttribute="centerY" secondItem="5hn-rU-NeO" secondAttribute="centerY" id="wMP-Kb-jGB"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLj-ub-3EY">
+                                                    <rect key="frame" x="0.0" y="440.66666666666663" width="313" height="122"/>
+                                                    <string key="text">The Tesla CEO wants the PhiladThe Tesla CEO wants the Philadelphia district attorney's case against his $1 million giveaway moved to federal court.elphia district attorney's case against his $1 million giveaway moved to federal court.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oo-jO-UYJ">
+                                            <rect key="frame" x="166.66666666666663" y="576.66666666666663" width="146.33333333333337" height="50"/>
+                                            <color key="backgroundColor" name="FavouriteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="cMG-jT-0em"/>
+                                            </constraints>
+                                            <color key="tintColor" name="WriterNameBG"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Add to favourites">
+                                                <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
+                                            </buttonConfiguration>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="16"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="6rl-ip-0Si" secondAttribute="bottom" constant="50" id="27C-fh-WNC"/>
+                                <constraint firstItem="6rl-ip-0Si" firstAttribute="leading" secondItem="qvs-lJ-DdK" secondAttribute="leading" constant="20" id="8wT-JW-0py"/>
+                                <constraint firstItem="6rl-ip-0Si" firstAttribute="top" secondItem="qvs-lJ-DdK" secondAttribute="top" constant="20" id="XwI-3B-d6E"/>
+                                <constraint firstAttribute="trailing" secondItem="6rl-ip-0Si" secondAttribute="trailing" constant="20" id="p4N-8D-1Av"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="qvs-lJ-DdK" secondAttribute="bottom" id="7Dk-Sj-ZCw"/>
+                        <constraint firstItem="qvs-lJ-DdK" firstAttribute="leading" secondItem="XD7-dv-CSs" secondAttribute="leading" id="Afg-2o-4Ju"/>
+                        <constraint firstItem="qvs-lJ-DdK" firstAttribute="width" secondItem="XD7-dv-CSs" secondAttribute="width" id="Dka-Ze-yL3"/>
+                        <constraint firstItem="qvs-lJ-DdK" firstAttribute="top" secondItem="XD7-dv-CSs" secondAttribute="top" id="fc1-OW-gUW"/>
+                        <constraint firstAttribute="trailing" secondItem="qvs-lJ-DdK" secondAttribute="trailing" id="wf6-AU-2uL"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="2SS-XX-Xw6"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="4wy-i5-g3d"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemGray6Color"/>
+            <constraints>
+                <constraint firstItem="XD7-dv-CSs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="EOB-EH-4NQ"/>
+                <constraint firstItem="XD7-dv-CSs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="HQm-We-N3E"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="XD7-dv-CSs" secondAttribute="bottom" constant="40" id="MbD-9A-5qn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XD7-dv-CSs" secondAttribute="trailing" constant="20" id="qup-8g-8v8"/>
+            </constraints>
+            <point key="canvasLocation" x="119.84732824427481" y="20.422535211267608"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="FavouriteColor">
+            <color red="0.64313725490196083" green="0.098039215686274508" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="WriterNameBG">
+            <color red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="WriterNameColor">
+            <color red="0.38823529411764707" green="0.37647058823529411" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

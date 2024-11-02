@@ -9,8 +9,13 @@ import Foundation
 
 
 class NewsRepository {
+    
+    //MARK: - VARIABLES
+    
     let networkManager = NetworkManager()
 
+    //MARK: - FUNCTIONS
+    
     func getNews(query:String, fromDate: String, toDate: String) async throws -> [Article] {
         do {
             let urlString = "\(Constants.baseURL)?q=\(query)&from=\(fromDate)&to=\(toDate)&sortBy=popularity&apiKey=\(Constants.apiKey)"

@@ -34,12 +34,12 @@ class FavouritesViewController: UIViewController {
     
     @MainActor
     private func bindViewModel() {
-            viewModel.$favouriteArticles
-                .sink { [weak self] _ in
-                    self?.favouritesCollectionView.reloadData()
-                }
-                .store(in: &cancellables)
-        }
+        viewModel.$favouriteArticles
+            .sink { [weak self] _ in
+                self?.favouritesCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
 }
 
 //MARK: - SETUPVIEW

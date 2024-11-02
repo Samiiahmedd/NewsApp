@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: - VARIABLES
-
+    
     private let viewModel: HomeViewModelProtocol = HomeViewModel()
     private var cancellables = Set<AnyCancellable>()
     
@@ -37,58 +37,54 @@ class HomeViewController: UIViewController {
     
     @objc private func favouriteButtonTapped() {
         let favouriteVC = FavouritesViewController(nibName: "FavouritesViewController", bundle: nil)
-                    navigationController?.pushViewController(favouriteVC, animated: true)
+        navigationController?.pushViewController(favouriteVC, animated: true)
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         fetchNewsData()
-}
+    }
     
     //MARK: - FUNCTIONS
-
-    private func fetchNewsData() {
-           let query = navigationItem.searchController?.searchBar.text?.isEmpty == false ?
-                       navigationItem.searchController?.searchBar.text! : "apple"
-           viewModel.fetchNews(for: datePicker.date, query: query!)
-       }
     
+    private func fetchNewsData() {
+        let query = navigationItem.searchController?.searchBar.text?.isEmpty == false ?
+        navigationItem.searchController?.searchBar.text! : "apple"
+        viewModel.fetchNews(for: datePicker.date, query: query!)
+    }
     
     private func bindViewModel() {
-            // Bind loading state
-            viewModel.isLoading
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] isLoading in
-                    self?.activityIndicator.isHidden = !isLoading
-                    isLoading ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
-                }
-                .store(in: &cancellables)
-
-            // Bind error messages
-            viewModel.errorMessage
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] message in
-                    self?.showError(message: message)
-                }
-                .store(in: &cancellables)
-
-            // Bind articles
-            viewModel.articles
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] articles in
-                    self?.newsCollectionView.reloadData()
-                }
-                .store(in: &cancellables)
-        }
+        // Bind loading state
+        viewModel.isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                self?.activityIndicator.isHidden = !isLoading
+                isLoading ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+            }
+            .store(in: &cancellables)
         
-        private func showError(message: String) {
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-        }
+        // Bind error messages
+        viewModel.errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
+                self?.showError(message: message)
+            }
+            .store(in: &cancellables)
+        
+        // Bind articles
+        viewModel.articles
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] articles in
+                self?.newsCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
-
     
-
+    private func showError(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+}
 
 //MARK: - SETUP VIEW
 
@@ -106,7 +102,7 @@ extension HomeViewController {
         let addImage = UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
         let addButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(favouriteButtonTapped))
         addButton.tintColor = UIColor(named: "FavouriteColor")
-
+        
         navigationItem.rightBarButtonItem = addButton
     }
     

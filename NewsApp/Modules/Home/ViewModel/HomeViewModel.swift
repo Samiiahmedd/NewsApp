@@ -28,10 +28,10 @@ class HomeViewModel: HomeViewModelProtocol {
     
     var isLoading: PassthroughSubject<Bool, Never> = .init()
     var errorMessage: PassthroughSubject<String, Never> = .init()
-    var articles: CurrentValueSubject<[Article], Never> = .init([]) 
+    var articles: CurrentValueSubject<[Article], Never> = .init([])
     private var cancellables = Set<AnyCancellable>()
     private var repository = NewsRepository()
-
+    
     func fetchNews(query: String, fromDate: String, toDate: String) {
         guard !query.isEmpty else {
             errorMessage.send("Please enter a valid query.")
@@ -49,8 +49,9 @@ class HomeViewModel: HomeViewModelProtocol {
             }
         }
     }
-
-    // Function to fetch news for a specific date
+    
+    // MARK: - Function to fetch news for a specific date
+    
     func fetchNews(for date: Date, query: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -59,7 +60,7 @@ class HomeViewModel: HomeViewModelProtocol {
     }
 }
 
-    
+
 
 
 

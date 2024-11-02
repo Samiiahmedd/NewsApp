@@ -49,7 +49,7 @@ class NewsDetailedScreenViewModel:NewsDetailedScreenViewModelProtocol {
         }
     }
     
-     func saveArticleToCoreData(article: Article) {
+    func saveArticleToCoreData(article: Article) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let newArticle = FavouriteArticle(context: context)

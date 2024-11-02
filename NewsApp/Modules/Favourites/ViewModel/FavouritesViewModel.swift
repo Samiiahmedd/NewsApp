@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 import Combine
 
-
 class FavouritesViewModel{
     
     //MARK: - VARIABLES
@@ -18,7 +17,7 @@ class FavouritesViewModel{
     
     // MARK: - FUNCTIONS
     
-     func fetchFavouriteArticles() {
+    func fetchFavouriteArticles() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         
@@ -30,5 +29,5 @@ class FavouritesViewModel{
             print("Failed to fetch articles: \(error.localizedDescription)")
         }
     }
-
+    
 }

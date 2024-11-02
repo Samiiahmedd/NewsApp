@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="NewsApp" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="b3O-Ha-102" id="WU8-gV-fCO"/>
                 <outlet property="datePicker" destination="hma-f1-nKh" id="vnW-v9-WfD"/>
                 <outlet property="newsCollectionView" destination="V0a-wQ-G2d" id="ngk-yn-bZI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,6 +22,9 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="b3O-Ha-102">
+                    <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                </activityIndicatorView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="P7I-ZI-BsR">
                     <rect key="frame" x="12" y="71" width="369" height="50"/>
                     <subviews>
@@ -62,6 +66,8 @@
                 <constraint firstItem="P7I-ZI-BsR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="Md5-az-z4Y"/>
                 <constraint firstItem="V0a-wQ-G2d" firstAttribute="top" secondItem="P7I-ZI-BsR" secondAttribute="bottom" constant="16" id="Zh5-6Q-FyO"/>
                 <constraint firstItem="V0a-wQ-G2d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mTL-rp-Diz"/>
+                <constraint firstItem="b3O-Ha-102" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="oaY-KZ-cAa"/>
+                <constraint firstItem="b3O-Ha-102" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sXJ-NY-K7F"/>
             </constraints>
             <point key="canvasLocation" x="-124.42748091603053" y="2.8169014084507045"/>
         </view>

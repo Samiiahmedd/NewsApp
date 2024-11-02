@@ -15,12 +15,12 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var newsCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: - VARIABLES
     
-    private let viewModel = HomeViewModel()
-    var newsResult: [Article] = []
-    
+    private let viewModel: HomeViewModelProtocol = HomeViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     //MARK: - VIEW LIFE CYCLE
     
@@ -29,8 +29,6 @@ class HomeViewController: UIViewController {
         self.title = "News"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupView()
-        updatesFromVM()
-        
     }
     
     //MARK: - IBACTIONS
@@ -44,27 +42,49 @@ class HomeViewController: UIViewController {
 }
     //MARK: - FUNCTIONS
 
-    func updatesFromVM() {
-        Task {
-            await viewModel.fetchNews(query: "apple", fromDate: "2024-11-01", toDate: "2024-11-01")
-        }
-        viewModel.onDataUpdate = { [weak self] in
-            DispatchQueue.main.async {
-                self?.newsResult = self?.viewModel.newsResult ?? []
-                self?.newsCollectionView.reloadData()
-            }
-        }
-        fetchNewsData()
-    }
-    
     private func fetchNewsData() {
-        let query = navigationItem.searchController?.searchBar.text?.isEmpty == false ?
-                    navigationItem.searchController?.searchBar.text! : "apple"
-        Task {
-            await viewModel.fetchNews(for: datePicker.date, query: query!)
+           let query = navigationItem.searchController?.searchBar.text?.isEmpty == false ?
+                       navigationItem.searchController?.searchBar.text! : "apple"
+           viewModel.fetchNews(for: datePicker.date, query: query!)
+       }
+    
+    
+    private func bindViewModel() {
+            // Bind loading state
+            viewModel.isLoading
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] isLoading in
+                    self?.activityIndicator.isHidden = !isLoading
+                    isLoading ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+                }
+                .store(in: &cancellables)
+
+            // Bind error messages
+            viewModel.errorMessage
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] message in
+                    self?.showError(message: message)
+                }
+                .store(in: &cancellables)
+
+            // Bind articles
+            viewModel.articles
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] articles in
+                    self?.newsCollectionView.reloadData()
+                }
+                .store(in: &cancellables)
+        }
+        
+        private func showError(message: String) {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
         }
     }
-}
+
+    
+
 
 // SETUP VIEW
 
@@ -75,6 +95,7 @@ extension HomeViewController {
         addSearchBar()
         registerCells()
         configerCollectionView()
+        activityIndicator.isHidden = true
     }
     
     func addNavigationBarButton() {
@@ -106,11 +127,9 @@ extension HomeViewController {
 extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text, !query.isEmpty else {
-            viewModel.clearNewsResults() // Clear results if search bar is empty
             newsCollectionView.reloadData()
             return
         }
-
         fetchNewsData()
     }
 }
@@ -119,19 +138,19 @@ extension HomeViewController: UISearchResultsUpdating {
 
 extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return newsResult.count
+        return viewModel.articles.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
-        cell.Setup(News: newsResult[indexPath.row])
+        cell.Setup(News: viewModel.articles.value[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedArticle = newsResult[indexPath.row]
+        let selectedArticle = viewModel.articles.value[indexPath.row]
         let detailVC = NewsDetailedScreenViewController()
-        detailVC.article = selectedArticle 
+        detailVC.article = selectedArticle
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     

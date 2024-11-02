@@ -38,8 +38,6 @@ class NewsCollectionViewCell: UICollectionViewCell {
     }
 }
 
-
-
 // MARK: - SETUP CELL
 
 extension NewsCollectionViewCell {

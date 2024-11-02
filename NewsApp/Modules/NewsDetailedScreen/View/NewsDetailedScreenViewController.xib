@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsDetailedScreenViewController" customModule="NewsApp" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="T7P-cc-XqK" id="KeJ-37-4OS"/>
                 <outlet property="addToFavouriteButton" destination="5Oo-jO-UYJ" id="UJZ-uU-XYk"/>
                 <outlet property="newDescription" destination="nLj-ub-3EY" id="giF-Eg-GmK"/>
                 <outlet property="newsImage" destination="p6R-SU-sSq" id="F1Z-AC-8gM"/>
@@ -25,12 +26,15 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XD7-dv-CSs">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD7-dv-CSs">
                     <rect key="frame" x="20" y="99" width="353" height="679"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qvs-lJ-DdK">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="696.66666666666663"/>
                             <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="T7P-cc-XqK">
+                                    <rect key="frame" x="166.66666666666666" y="338.33333333333331" width="20" height="20"/>
+                                </activityIndicatorView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="6rl-ip-0Si">
                                     <rect key="frame" x="20" y="20" width="313" height="626.66666666666663"/>
                                     <subviews>
@@ -115,10 +119,18 @@
                                 <constraint firstAttribute="bottom" secondItem="6rl-ip-0Si" secondAttribute="bottom" constant="50" id="27C-fh-WNC"/>
                                 <constraint firstItem="6rl-ip-0Si" firstAttribute="leading" secondItem="qvs-lJ-DdK" secondAttribute="leading" constant="20" id="8wT-JW-0py"/>
                                 <constraint firstItem="6rl-ip-0Si" firstAttribute="top" secondItem="qvs-lJ-DdK" secondAttribute="top" constant="20" id="XwI-3B-d6E"/>
+                                <constraint firstItem="T7P-cc-XqK" firstAttribute="centerX" secondItem="qvs-lJ-DdK" secondAttribute="centerX" id="fkz-eG-nvF"/>
                                 <constraint firstAttribute="trailing" secondItem="6rl-ip-0Si" secondAttribute="trailing" constant="20" id="p4N-8D-1Av"/>
+                                <constraint firstItem="T7P-cc-XqK" firstAttribute="centerY" secondItem="qvs-lJ-DdK" secondAttribute="centerY" id="xEk-Th-lWE"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="30"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="qvs-lJ-DdK" secondAttribute="bottom" id="7Dk-Sj-ZCw"/>
                         <constraint firstItem="qvs-lJ-DdK" firstAttribute="leading" secondItem="XD7-dv-CSs" secondAttribute="leading" id="Afg-2o-4Ju"/>

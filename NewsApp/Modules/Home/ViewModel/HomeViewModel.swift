@@ -30,6 +30,7 @@ class HomeViewModel: HomeViewModelProtocol {
     var errorMessage: PassthroughSubject<String, Never> = .init()
     var articles: CurrentValueSubject<[Article], Never> = .init([]) 
     private var cancellables = Set<AnyCancellable>()
+    private var repository = NewsRepository()
 
     func fetchNews(query: String, fromDate: String, toDate: String) {
         guard !query.isEmpty else {
@@ -37,12 +38,10 @@ class HomeViewModel: HomeViewModelProtocol {
             return
         }
         isLoading.send(true)
-        let networkManager = NetworkManager<NewsResponse>()
         Task {
             do {
-                let urlString = "\(Constants.baseURL)?q=\(query)&from=\(fromDate)&to=\(toDate)&sortBy=popularity&apiKey=\(Constants.apiKey)"
-                let articlesResponse = try await networkManager.getData(from: urlString)
-                self.articles.send(articlesResponse.articles)
+                let articlesResponse = try await repository.getNews(query: query, fromDate: fromDate, toDate: toDate)
+                self.articles.send(articlesResponse)
                 isLoading.send(false)
             } catch {
                 isLoading.send(false)

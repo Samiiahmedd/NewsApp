@@ -7,10 +7,10 @@
 
 import Foundation
 
-class NetworkManager<T: Decodable> {
+class NetworkManager {
     
     // Fetch data from a URL
-    func getData(from url: String) async throws -> T {
+    func getData(from url: String) async throws -> Data {
         guard let url = URL(string: url) else {
             throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
         }
@@ -20,8 +20,6 @@ class NetworkManager<T: Decodable> {
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw NSError(domain: "Server error", code: 0, userInfo: nil)
         }
-        
-        let decodedResponse = try JSONDecoder().decode(T.self, from: data)
-        return decodedResponse
+        return data
     }
 }

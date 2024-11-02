@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import CoreData
-import Kingfisher
+import Combine
 
 class FavouritesViewController: UIViewController {
     
@@ -16,7 +15,9 @@ class FavouritesViewController: UIViewController {
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     
     //MARK: - VARIABLES
-    var favouriteArticles: [FavouriteArticle] = []
+    
+    var viewModel = FavouritesViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     //MARK: - VIEW LIFE CYCLE
     
@@ -24,25 +25,21 @@ class FavouritesViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Favourites"
         navigationController?.navigationBar.prefersLargeTitles = true
-        fetchFavouriteArticles()
+        viewModel.fetchFavouriteArticles()
         setupView()
+        bindViewModel()
     }
     
-    // MARK: - FUNCTIONS
+    //MARK: - BIND VM
     
-    private func fetchFavouriteArticles() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest: NSFetchRequest<FavouriteArticle> = FavouriteArticle.fetchRequest()
-        
-        do {
-            favouriteArticles = try context.fetch(fetchRequest)
-            favouritesCollectionView.reloadData()
-        } catch {
-            print("Failed to fetch articles: \(error.localizedDescription)")
+    @MainActor
+    private func bindViewModel() {
+            viewModel.$favouriteArticles
+                .sink { [weak self] _ in
+                    self?.favouritesCollectionView.reloadData()
+                }
+                .store(in: &cancellables)
         }
-    }
 }
 
 //MARK: - SETUPVIEW
@@ -67,22 +64,22 @@ extension FavouritesViewController {
 
 extension FavouritesViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favouriteArticles.count
+        return viewModel.favouriteArticles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
-        let article = favouriteArticles[indexPath.item]
+        let article = viewModel.favouriteArticles[indexPath.item]
         let articleModel = Article(from: article)
         cell.Setup(News: articleModel)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedArticle = favouriteArticles[indexPath.item]
+        let selectedArticle = viewModel.favouriteArticles[indexPath.item]
         let articleModel = Article(from: selectedArticle)
         let detailVC = NewsDetailedScreenViewController()
-        detailVC.article = articleModel
+        detailVC.viewModel.article = articleModel
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     

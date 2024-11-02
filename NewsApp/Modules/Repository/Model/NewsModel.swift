@@ -10,7 +10,6 @@ import Foundation
 // MARK: - NewsResponse
 struct NewsResponse: Codable {
     let articles: [Article]
-    
 }
 
 // MARK: - Source

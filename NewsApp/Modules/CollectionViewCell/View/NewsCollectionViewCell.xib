@@ -36,7 +36,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="dly-Z0-kGg">
                                 <rect key="frame" x="20" y="142" width="120" height="152"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENv-9n-3vJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ENv-9n-3vJ">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="114.66666666666667"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
@@ -46,7 +46,7 @@
                                         <rect key="frame" x="0.0" y="117.66666666666669" width="120" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="oTR-BC-10h">
-                                                <rect key="frame" x="10.000000000000002" y="4.3333333333333135" width="21.666666666666671" height="9.6666666666666643"/>
+                                                <rect key="frame" x="4" y="4.3333333333333135" width="21.666666666666668" height="9.6666666666666643"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                 <color key="textColor" name="WriterNameColor"/>
                                                 <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                                         </subviews>
                                         <color key="backgroundColor" name="WriterNameBG"/>
                                         <constraints>
-                                            <constraint firstItem="oTR-BC-10h" firstAttribute="leading" secondItem="DUZ-4G-qcw" secondAttribute="leading" constant="10" id="1jN-jh-rIH"/>
+                                            <constraint firstItem="oTR-BC-10h" firstAttribute="leading" secondItem="DUZ-4G-qcw" secondAttribute="leading" constant="4" id="1jN-jh-rIH"/>
                                             <constraint firstItem="oTR-BC-10h" firstAttribute="centerY" secondItem="DUZ-4G-qcw" secondAttribute="centerY" id="Crv-Su-KWU"/>
                                             <constraint firstAttribute="height" constant="18" id="RWk-ej-ou8"/>
                                         </constraints>
@@ -104,6 +104,7 @@
                 <outlet property="newsDescription" destination="DbP-Wz-qUE" id="3qW-Xg-zIN"/>
                 <outlet property="newsTitle" destination="ENv-9n-3vJ" id="V5S-GD-JDw"/>
                 <outlet property="newsWriter" destination="oTR-BC-10h" id="UWe-Ao-B6Q"/>
+                <outlet property="writerView" destination="DUZ-4G-qcw" id="xVA-pc-kee"/>
             </connections>
             <point key="canvasLocation" x="12.213740458015266" y="40.140845070422536"/>
         </collectionViewCell>

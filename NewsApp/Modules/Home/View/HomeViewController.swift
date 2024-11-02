@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: - VARIABLES
-    
+
     private let viewModel: HomeViewModelProtocol = HomeViewModel()
     private var cancellables = Set<AnyCancellable>()
     
@@ -29,17 +29,21 @@ class HomeViewController: UIViewController {
         self.title = "News"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupView()
+        bindViewModel()
+        fetchNewsData()
     }
     
     //MARK: - IBACTIONS
     
-    @objc private func addButtonTapped() {
-        // Action to perform when the button is tapped
+    @objc private func favouriteButtonTapped() {
+        let favouriteVC = FavouritesViewController(nibName: "FavouritesViewController", bundle: nil)
+                    navigationController?.pushViewController(favouriteVC, animated: true)
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         fetchNewsData()
 }
+    
     //MARK: - FUNCTIONS
 
     private func fetchNewsData() {
@@ -86,7 +90,7 @@ class HomeViewController: UIViewController {
     
 
 
-// SETUP VIEW
+//MARK: - SETUP VIEW
 
 extension HomeViewController {
     
@@ -99,8 +103,10 @@ extension HomeViewController {
     }
     
     func addNavigationBarButton() {
-        let addImage = UIImage(systemName: "heart.fill")
-        let addButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(addButtonTapped))
+        let addImage = UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
+        let addButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(favouriteButtonTapped))
+        addButton.tintColor = UIColor(named: "FavouriteColor")
+
         navigationItem.rightBarButtonItem = addButton
     }
     
@@ -122,7 +128,7 @@ extension HomeViewController {
     }
 }
 
-//Extention Search Results
+//MARK: - Extention Search Results
 
 extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -134,7 +140,7 @@ extension HomeViewController: UISearchResultsUpdating {
     }
 }
 
-// CollectionViewExtention
+//MARK: - CollectionViewExtention
 
 extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

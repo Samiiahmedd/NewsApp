@@ -6,25 +6,45 @@
 //
 
 import Foundation
+import Combine
 
-class DetailedScreenViewModel {
+protocol DetailedScreenViewModelProtocol {
+    //output
+    var isLoading: PassthroughSubject<Bool, Never> { get }
+    var errorMessage: PassthroughSubject<String, Never> { get }
+    var articleDetails: CurrentValueSubject<[Article], Never> { get }
     
-    func fetchArticleDetails(url: String) async throws -> Article {
-        guard let articleUrl = URL(string: url) else {
-            throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
-        }
-        
-        let (data, response) = try await URLSession.shared.data(from: articleUrl)
+    // Input
+    func fetchArticleDetails(url: String)
+}
 
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw NSError(domain: "Server error", code: 0, userInfo: nil)
+class DetailedScreenViewModel:DetailedScreenViewModelProtocol {
+    
+    // MARK: - Properties
+    
+    var isLoading: PassthroughSubject<Bool, Never> = .init()
+    var errorMessage: PassthroughSubject<String, Never> = .init()
+    var articleDetails: CurrentValueSubject<[Article], Never> = .init([])
+    private var cancellables = Set<AnyCancellable>()
+    
+    func fetchArticleDetails(url: String) {
+        guard URL(string: url) != nil else {
+            errorMessage.send("invalidRoot")
+            return
         }
         
-        do {
-            let articleDetail = try JSONDecoder().decode(Article.self, from: data)
-            return articleDetail
-        } catch {
-            throw error
+        isLoading.send(true)
+        let networkManager = NetworkManager<NewsResponse>()
+        Task {
+            do {
+                let articleUrl = ""
+                let articlesResponse = try await networkManager.getData(from: articleUrl)
+                self.articleDetails.send(articlesResponse.articles)
+                isLoading.send(false)
+            } catch {
+                isLoading.send(false)
+                errorMessage.send(error.localizedDescription)
+            }
         }
     }
 }

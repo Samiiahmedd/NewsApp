@@ -9,13 +9,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailedScreenViewController" customModule="NewsApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsDetailedScreenViewController" customModule="NewsApp" customModuleProvider="target">
             <connections>
+                <outlet property="addToFavouriteButton" destination="5Oo-jO-UYJ" id="UJZ-uU-XYk"/>
                 <outlet property="newDescription" destination="nLj-ub-3EY" id="giF-Eg-GmK"/>
                 <outlet property="newsImage" destination="p6R-SU-sSq" id="F1Z-AC-8gM"/>
                 <outlet property="newsTitle" destination="dJX-T9-Gy2" id="CVM-FE-olc"/>
                 <outlet property="newsWriter" destination="KsI-bl-Dkj" id="Yma-fj-mHi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="writerView" destination="5hn-rU-NeO" id="bpw-3I-QFt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -47,7 +49,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJX-T9-Gy2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJX-T9-Gy2">
                                                     <rect key="frame" x="0.0" y="334" width="56.666666666666664" height="28.666666666666686"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
@@ -56,18 +58,18 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hn-rU-NeO">
                                                     <rect key="frame" x="0.0" y="376.66666666666669" width="220" height="50"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsI-bl-Dkj">
-                                                            <rect key="frame" x="84" y="11.999999999999998" width="52" height="26.333333333333329"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KsI-bl-Dkj">
+                                                            <rect key="frame" x="4" y="14.333333333333316" width="43.666666666666664" height="21.666666666666671"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" name="WriterNameColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" name="WriterNameBG"/>
                                                     <constraints>
+                                                        <constraint firstItem="KsI-bl-Dkj" firstAttribute="leading" secondItem="5hn-rU-NeO" secondAttribute="leading" constant="4" id="5lE-6p-tUK"/>
                                                         <constraint firstAttribute="width" constant="220" id="6o0-I2-2Z3"/>
                                                         <constraint firstAttribute="height" constant="50" id="sL9-Zk-ewK"/>
-                                                        <constraint firstItem="KsI-bl-Dkj" firstAttribute="centerX" secondItem="5hn-rU-NeO" secondAttribute="centerX" id="st0-x1-5gr"/>
                                                         <constraint firstItem="KsI-bl-Dkj" firstAttribute="centerY" secondItem="5hn-rU-NeO" secondAttribute="centerY" id="wMP-Kb-jGB"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -76,7 +78,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLj-ub-3EY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLj-ub-3EY">
                                                     <rect key="frame" x="0.0" y="440.66666666666663" width="313" height="122"/>
                                                     <string key="text">The Tesla CEO wants the PhiladThe Tesla CEO wants the Philadelphia district attorney's case against his $1 million giveaway moved to federal court.elphia district attorney's case against his $1 million giveaway moved to federal court.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -86,7 +88,7 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oo-jO-UYJ">
-                                            <rect key="frame" x="166.66666666666663" y="576.66666666666663" width="146.33333333333337" height="50"/>
+                                            <rect key="frame" x="119" y="576.66666666666663" width="194" height="50"/>
                                             <color key="backgroundColor" name="FavouriteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="cMG-jT-0em"/>
@@ -94,13 +96,16 @@
                                             <color key="tintColor" name="WriterNameBG"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Add to favourites">
-                                                <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="22"/>
                                             </buttonConfiguration>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                     <real key="value" value="22"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="addToFavouritesButtonAction:" destination="-1" eventType="touchUpInside" id="RSF-lo-veJ"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
